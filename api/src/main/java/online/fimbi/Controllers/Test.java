@@ -15,7 +15,6 @@ import online.fimbi.Dto.Bond;
 public class Test {
 	@GetMapping("bond")
 	public ResponseEntity<Bond> get_bond() {
-		Bond b = new Bond();
-		return new ResponseEntity<>(b, HttpStatus.OK);
+		return new ResponseEntity<>(Bond.random_bond(), HttpStatus.OK);
 	}
 }

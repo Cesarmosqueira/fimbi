@@ -22,4 +22,7 @@ export class BondDetailComponent implements OnInit {
     });
   }
 
+  create_chart() {
+  }
+
 }
