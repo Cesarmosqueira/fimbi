@@ -8,6 +8,7 @@ class FimbiApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("Homla soy un test");
 	}
 
 }

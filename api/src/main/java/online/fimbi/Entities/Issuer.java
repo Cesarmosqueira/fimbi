@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import online.fimbi.Dto.IssuerDto;
 
 @Entity
 @Table(name = "issuer")
@@ -27,7 +28,7 @@ public class Issuer {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(nullable = false, length = 4)
+	@Column(nullable = false, length = 8)
 	private String market_identifier; // (ISO 10383)
 
 	@Column(nullable = false, length = 1024)
@@ -43,5 +44,12 @@ public class Issuer {
 	@JoinColumn(name = "issuer_id") // we need to duplicate the physical information
 	@Size(min = 0, max = 16)
 	private Set<Bond> bonds;
+
+	public Issuer(IssuerDto issuerDto) {
+		this.market_identifier = issuerDto.getMarket_identifier();
+		this.description = issuerDto.getDescription();
+		this.date_joined = issuerDto.getDate_joined();
+		this.image_url = issuerDto.getImage_url();
+	}
 
 }

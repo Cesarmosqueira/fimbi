@@ -7,14 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import online.fimbi.Dto.Bond;
-
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("test")
 public class Test {
-	@GetMapping("bond")
-	public ResponseEntity<Bond> get_bond() {
-		return new ResponseEntity<>(Bond.random_bond(), HttpStatus.OK);
+	@GetMapping
+	public ResponseEntity<String> homla() {
+		return new ResponseEntity<>("Homla", HttpStatus.OK);
 	}
+
 }
