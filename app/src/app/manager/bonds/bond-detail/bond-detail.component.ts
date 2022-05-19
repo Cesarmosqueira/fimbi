@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Bond} from 'src/app/entities/entities-model';
 import {BondService} from '../bond.service';
-import {Bond} from '../entities-model';
 
 @Component({
   selector: 'app-bond-detail',
@@ -14,8 +14,6 @@ export class BondDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBond();
-    this.create_issuer();
-
   }
 
   getBond() {

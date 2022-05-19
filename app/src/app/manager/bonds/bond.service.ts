@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {Bond, Issuer} from 'src/app/entities/entities-model';
 import {environment} from 'src/environments/environment';
-import {Bond, Issuer} from './entities-model';
 
 
 @Injectable({

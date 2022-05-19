@@ -13,9 +13,6 @@ import {HomeComponent} from './home/home.component';
 import {LayoutComponent} from './layout/layout.component';
 
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +28,7 @@ import {LayoutComponent} from './layout/layout.component';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatGridListModule
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
