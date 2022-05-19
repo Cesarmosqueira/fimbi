@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Bond} from '../bond.model';
 import {BondService} from '../bond.service';
+import {Bond} from '../entities-model';
 
 @Component({
   selector: 'app-bond-detail',
@@ -8,21 +8,26 @@ import {BondService} from '../bond.service';
   styleUrls: ['./bond-detail.component.css']
 })
 export class BondDetailComponent implements OnInit {
-  bond : Bond;
+  output : Bond;
 
   constructor(private bondService: BondService) {}
 
   ngOnInit(): void {
     this.getBond();
+    this.create_issuer();
+
   }
 
   getBond() {
-    this.bondService.get_bond().subscribe((data) => {
-      this.bond = data;
-    });
+    // this.bondService.get_bond().subscribe((data) => {
+    //   this.output = data;
+    // });
   }
 
-  create_chart() {
+  create_issuer() {
+    this.bondService.post_issuer().subscribe((data) => {
+      console.log(data);
+    });
   }
 
 }
