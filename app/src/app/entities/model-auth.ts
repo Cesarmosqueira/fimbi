@@ -8,5 +8,5 @@ export class User {
   password : string;
   email : string;
   birth_date : string;
-  image : string;
+  image_url : string;
 }

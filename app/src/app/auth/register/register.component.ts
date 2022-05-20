@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {User} from '../../entities/model-auth';
 import {AuthService} from '../auth-service';
 
 @Component({
@@ -7,12 +8,22 @@ import {AuthService} from '../auth-service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  public user : User = new User();
   constructor(
     private authService : AuthService
   ) { }
 
   ngOnInit(): void {
+  }
+
+  onRegister() {
+    this.user.image_url = "fimbi";
+    console.log(this.user);
+    this.authService.signUp(this.user)
+          .subscribe({
+        next: (data) => {console.log(data)},
+        error: (error) => {console.log(error)},
+        complete: () => {console.log('No error')}});
   }
 
 }
