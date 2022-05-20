@@ -21,9 +21,7 @@ public class BondController {
 
 	@PostMapping
 	public ResponseEntity<BondDto> post_bond(@RequestBody BondDto bondDto) {
-		System.out.println("Starting");
 		bondService.save_bond(bondDto);
-		System.out.println("Done");
 		return new ResponseEntity<>(bondDto, HttpStatus.OK);
 	}
 }

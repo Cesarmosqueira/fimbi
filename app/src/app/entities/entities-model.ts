@@ -10,6 +10,11 @@
 //   available: boolean;
 // }
 
+export class FimbiResponse {
+  description : string;
+  code : number;
+}
+
 export class Bond {
   msg : string;
 }
