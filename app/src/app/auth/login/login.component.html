@@ -3,7 +3,6 @@
     <mat-card-title>Login</mat-card-title>
     <mat-card-subtitle>Fill the following</mat-card-subtitle>
   </p>
-  
   <form autocomplete="off" (ngSubmit)="onLogin()" #loginForm="ngForm">
     <p>
     <mat-form-field appearance="legacy" class="text_box">
@@ -12,8 +11,7 @@
         name="username"
         [(ngModel)]="login.username"
         #username="ngModel"
-        required
-      >
+        required>
       <mat-icon matSuffix>email</mat-icon>
     </mat-form-field>
     <br>
@@ -24,8 +22,7 @@
         [(ngModel)]="login.password"
         #password="ngModel"
         class="text_box"
-        required
-      >
+        required>
       <mat-icon matSuffix>password</mat-icon>
     </mat-form-field>
     </p>
@@ -55,4 +52,3 @@
 
 </mat-card>
 <br>
-

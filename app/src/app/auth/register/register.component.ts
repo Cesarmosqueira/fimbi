@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {User} from '../../entities/model-auth';
 import {AuthService} from '../auth-service';
 
@@ -10,8 +11,13 @@ import {AuthService} from '../auth-service';
 export class RegisterComponent implements OnInit {
   public user : User = new User();
   constructor(
-    private authService : AuthService
+    private authService : AuthService,
+    private router : Router
   ) { }
+
+  goToPage(pageName:string){
+    this.router.navigate([`${pageName}`]);
+  }
 
   ngOnInit(): void {
   }
@@ -24,6 +30,7 @@ export class RegisterComponent implements OnInit {
         next: (data) => {console.log(data)},
         error: (error) => {console.log(error)},
         complete: () => {console.log('No error')}});
+    
   }
 
 }

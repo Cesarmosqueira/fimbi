@@ -16,6 +16,10 @@ export class LayoutComponent implements OnInit {
   public title: string = "";
   constructor(private router : Router) { }
 
+  goToPage(pageName:string){
+    this.router.navigate([`${pageName}`]);
+  }
+
   ngOnInit(): void {
     let page = this.router.url.split('/', 2)[1];
     if (page) {

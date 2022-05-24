@@ -4,6 +4,16 @@ import {FimbiResponse} from 'src/app/entities/entities-model';
 import {Login} from 'src/app/entities/model-auth';
 import {AuthService} from '../auth-service';
 
+function validateEmail (emailAdress : string)
+{
+  let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (emailAdress.match(regexEmail)) {
+    return true; 
+  } else {
+    return false; 
+  }
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,9 +28,12 @@ export class LoginComponent implements OnInit {
   loginResponse : FimbiResponse
 
   constructor(
-    private authService : AuthService,
-    private router : Router
-  ) { 
+      private authService : AuthService,
+      private router : Router
+    ) { 
+  }
+  goToPage(pageName:string){
+    this.router.navigate([`${pageName}`]);
   }
 
   ngOnInit(): void {
@@ -42,12 +55,24 @@ export class LoginComponent implements OnInit {
 
     if(this.loginResponse.code == 1) {
       this.success = true;
+      this.goToPage("");
     }
   }
 
   onLogin() {
     this.submitted = false;
     this.wrong_username = false;
+
+    let input = this.login.username;
+
+    if(validateEmail(input)) {
+      this.login.username = "-1";
+      this.login.email = input;
+    } else {
+      this.login.username = input;
+      this.login.email = "-1";
+    }
+
 
     this.authService.signIn(this.login)
           .subscribe({
@@ -56,9 +81,6 @@ export class LoginComponent implements OnInit {
         complete: () => { this.handle_completion()}}
     );
 
-  }
-
-  goToPage(pageName:string){
-    this.router.navigate([`${pageName}`]);
+    this.login.username = input;
   }
 }

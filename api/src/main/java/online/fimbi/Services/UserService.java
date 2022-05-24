@@ -26,18 +26,23 @@ public class UserService {
 
 	public FimbiResponse login_user(LoginRequest loginRequest) throws FimbiException {
 		String username = loginRequest.getUsername();
-		if (username == null) {
-			throw new FimbiException("User field is empty");
+		String email = loginRequest.getEmail();
 
+		String password = null;
+		if (username == null && email == null) {
+			throw new FimbiException("No data received");
+		} else if (!username.equals("-1")) {
+			password = userRepository.get_password_username(username)
+					.orElseThrow(() -> new FimbiException("User doesn't exist"));
+		} else if (!email.equals("-1")) {
+			password = userRepository.get_password_email(email)
+					.orElseThrow(() -> new FimbiException("User doesn't exist"));
 		}
-		String password = userRepository.get_password(username)
-				.orElseThrow(() -> new FimbiException("User doesn't exist"));
 
 		if (password.equals(loginRequest.getPassword())) {
 			return new FimbiResponse("Login successfull", 1);
 		} else {
 			return new FimbiResponse("Login failed", 0);
 		}
-
 	}
 }
