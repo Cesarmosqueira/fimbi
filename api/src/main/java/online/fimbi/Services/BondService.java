@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import online.fimbi.Common.EntityDtoConverter;
 import online.fimbi.Dto.BondDto;
 import online.fimbi.Entities.Bond;
 import online.fimbi.Exception.FimbiException;
@@ -21,6 +22,9 @@ public class BondService {
 	@Autowired
 	private BondRepository bondRepository;
 
+	@Autowired
+	private EntityDtoConverter entityDtoConverter;
+
 	public Bond save_bond(BondDto bondDto) throws FimbiException {
 		String issuer_identifier = bondDto.getIssuer_identifier();
 		List<Long> ids_for_identifier = issuerRepository.identifier_exists(issuer_identifier);
@@ -35,5 +39,10 @@ public class BondService {
 					issuer_identifier));
 		}
 		return bondRepository.save(bond);
+	}
+
+	public List<BondDto> get_lastest_bonds(int size) throws FimbiException {
+		List<Bond> last_bonds = bondRepository.latest_bonds(size);
+		return entityDtoConverter.convertBondsToDto(last_bonds);
 	}
 }
