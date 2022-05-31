@@ -2,6 +2,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSliderModule} from '@angular/material/slider';
@@ -30,6 +31,7 @@ import {LayoutComponent} from './layout/layout.component';
     MatIconModule,
     MatButtonModule,
     MatGridListModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

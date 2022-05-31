@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Bond} from '../entities/entities-model';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  latest_bonds : Bond[];
   constructor() { }
 
   ngOnInit(): void {

@@ -1,6 +1,7 @@
 .home {
-  height: 100%;
-  position: relative;
+  max-height: 80%;
 }
 
-
+.mat-grid-tile-content {
+  vertical-align: top!important;
+}
