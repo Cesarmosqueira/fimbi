@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {LoginLayoutComponent} from './auth/login-layout/login-layout.component';
 import {HomeComponent} from './home/home.component';
@@ -22,6 +22,7 @@ const routes: Routes = [
     component: LoginLayoutComponent,
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   }
+
 
 ];
 

@@ -1,0 +1,14 @@
+.login_card {
+  display: block;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width:60%;
+  text-align: center;
+  max-width: 300px;
+  background-color: #92a2fc;
+}
+
+.text_box {
+  width: 85%;
+}

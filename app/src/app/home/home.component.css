@@ -2,6 +2,9 @@
   max-height: 80%;
 }
 
-.mat-grid-tile-content {
-  vertical-align: top!important;
+.left_column, .right_column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 }
