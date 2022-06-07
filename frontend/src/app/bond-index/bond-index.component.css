@@ -1,0 +1,36 @@
+.home{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+    justify-content: space-between;
+}
+.big-card {
+  text-align: center;
+    background-color: #3f51b5;
+    margin: 2rem 1rem;
+    padding: 1rem 0rem;
+}
+.card{
+  text-align: center;
+    padding: 2rem;
+    margin: 2rem;
+}
+.button{
+  text-align: center;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.create_button_field {
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+}
+th.mat-header-cell {
+  text-align: center !important;
+}

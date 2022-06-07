@@ -12,6 +12,10 @@ import { BondDetailComponent } from './bond-detail/bond-detail.component';
 import { MatCardModule } from '@angular/material/card';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
+import { MatTableModule} from '@angular/material/table';
+import { MatChipsModule} from '@angular/material/chips';
+import { IssuerDetailComponent } from './issuer-detail/issuer-detail.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -19,6 +23,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     HomeComponent,
     BondIndexComponent,
     BondDetailComponent,
+    IssuerDetailComponent,
   ],
   imports: [
     HttpClientModule,
@@ -30,6 +35,9 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatButtonModule,
     MatCardModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatChipsModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,7 +7,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import online.fimbi.Dto.BondDto;
+import online.fimbi.Dto.IssuerDto;
+import online.fimbi.Dto.UserDto;
 import online.fimbi.Entities.Bond;
+import online.fimbi.Entities.Issuer;
+import online.fimbi.Entities.User;
 
 @Component
 public class EntityDtoConverter {
@@ -24,4 +28,21 @@ public class EntityDtoConverter {
 	public List<BondDto> convertBondsToDto(List<Bond> bonds) {
 		return bonds.stream().map(this::convertBondToDto).collect(Collectors.toList());
 	}
+
+	public UserDto convertUserToDto(User user) {
+		return modelMapper.map(user, UserDto.class);
+	}
+
+	public List<UserDto> convertUsersToDto(List<User> users) {
+		return users.stream().map(this::convertUserToDto).collect(Collectors.toList());
+	}
+
+	public IssuerDto convertIssuerToDto(Issuer issuer) {
+		return modelMapper.map(issuer, IssuerDto.class);
+	}
+
+	public List<IssuerDto> convertIssuersToDto(List<Issuer> issuers) {
+		return issuers.stream().map(this::convertIssuerToDto).collect(Collectors.toList());
+	}
+
 }

@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
       private authService : AuthServiceService,
-      private router : Router
+      private router : Router,
     ) {
   }
   goToPage(pageName:string){
@@ -55,6 +55,12 @@ export class LoginComponent implements OnInit {
 
     if(this.loginResponse.code == 1) {
       this.success = true;
+      localStorage.setItem("user", this.login.username);
+      localStorage.setItem("email", this.login.email);
+      localStorage.setItem("password", this.login.password);
+      setTimeout(()=>{
+        window.location.reload();
+      }, 100);
       this.goToPage("");
     }
   }
@@ -79,8 +85,6 @@ export class LoginComponent implements OnInit {
         error: () => { this.handle_error()},
         complete: () => { this.handle_completion()}}
     );
-
-      this.login.username = input;
-    }
+  }
 
 }

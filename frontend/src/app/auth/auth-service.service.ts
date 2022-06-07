@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from 'src/environments/environment';
-import {FimbiResponse, Login, User} from '../models/entities-model';
+import {FimbiResponse, User} from '../models/entities-model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class AuthServiceService {
 
   constructor(private http: HttpClient) {}
 
-  signIn(login: Login) {
+  signIn(login: any) {
     return this.http.put<FimbiResponse>(`${this.apiBase}/users/login`, login);
   }
 

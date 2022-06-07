@@ -27,7 +27,16 @@ export class SignupComponent implements OnInit {
     console.log(this.user);
     this.authService.signUp(this.user)
           .subscribe({
-        next: (data) => {console.log(data)},
+        next: (data) => {
+          console.log(data);
+          localStorage.setItem("user", this.user.username);
+          localStorage.setItem("email", this.user.email);
+          localStorage.setItem("password", this.user.password);
+          setTimeout(()=>{
+            window.location.reload();
+          }, 100);
+          this.goToPage('');
+        },
         error: (error) => {console.log(error)},
         complete: () => {console.log('No error')}});
 

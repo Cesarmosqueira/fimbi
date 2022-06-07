@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import online.fimbi.Dto.FimbiResponse;
@@ -39,5 +40,16 @@ public class UserController {
 	public ResponseEntity<FimbiResponse> login(@RequestBody LoginRequest loginRequest) throws FimbiException {
 		FimbiResponse response = userService.login_user(loginRequest);
 		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+	@PostMapping("adquire_bond")
+	public ResponseEntity<FimbiResponse> adquire_bond(@RequestBody LoginRequest loginRequest,
+			@RequestParam String bond_id) throws FimbiException {
+		FimbiResponse login_response = userService.login_user(loginRequest);
+		if (login_response.getCode() == 0) {
+			throw new FimbiException("Couldn't authenticate");
+		}
+		FimbiResponse purchase_response = userService.adquire_bond(loginRequest.getUsername(), Long.valueOf(bond_id));
+		return new ResponseEntity<>(purchase_response, HttpStatus.OK);
 	}
 }

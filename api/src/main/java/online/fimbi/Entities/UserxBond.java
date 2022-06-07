@@ -1,12 +1,15 @@
 package online.fimbi.Entities;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,12 +23,13 @@ public class UserxBond {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
 
-	@ManyToOne
-	@JoinColumn(name = "bond_id", insertable = false, updatable = false)
-	private Bond bond;
+	@Column
+	Long bond_id;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id", insertable = false, updatable = false)
-	private User user;
+	@Column
+	Long user_id;
 
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
+	Date purchase_date;
 }

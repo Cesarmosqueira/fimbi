@@ -6,10 +6,13 @@ import java.util.Random;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class IssuerDto {
+	Long id;
 	String market_identifier; // (ISO 10383)
 	String description;
 	Date date_joined;
@@ -54,7 +57,7 @@ public class IssuerDto {
 		Date dat = new Date();
 		String img = "https://www.kindpng.com/picc/m/231-2310451_building-clip-art-images-free-clipart-images-building.png";
 
-		IssuerDto issuerDto = new IssuerDto(mic, des, dat, img);
+		IssuerDto issuerDto = new IssuerDto(Long.parseLong("0"), mic, des, dat, img);
 		return issuerDto;
 
 	}

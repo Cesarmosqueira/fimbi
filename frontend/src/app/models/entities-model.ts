@@ -17,7 +17,14 @@ export class FimbiResponse {
 }
 
 export class Bond {
-  msg : string;
+  id: number;
+  capitalization_rate: string;
+  due_date: Date;
+  external_interest_rate: string;
+  interest_rate: number;
+  issuer_identifier: string;
+  nominal_value: number;
+  splits: number;
 }
 
 export class Issuer {
@@ -25,4 +32,10 @@ export class Issuer {
   description : string;
   date_joined : string;
   image_url : string;
+}
+
+export class Purchase {
+  userDto : User;
+  bondDto : Bond;
+  purchase_date : Date;
 }

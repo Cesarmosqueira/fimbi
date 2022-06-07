@@ -1,1 +1,47 @@
-<p>bond-detail works!</p>
+<div class="home">
+
+  <div class="left_column">
+    <mat-card class="big-card">
+      <h2>Issuer Information</h2>
+      <mat-card class="container">
+          <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title >
+            <button mat-button (click)="goToPage('issuer/' + issuer.market_identifier)">
+              <h2>{{issuer.market_identifier}} </h2>
+            </button>
+          </mat-card-title>
+          <mat-card-subtitle>Joined on {{issuer.date_joined}}</mat-card-subtitle>
+        </mat-card-header>
+        <img class="issuer_pic"
+        mat-card-image src={{issuer.image_url}} alt={{issuer.market_identifier}}>
+        <mat-card-content>
+          <p>
+          {{issuer.description}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+      
+    </mat-card>
+  </div>
+
+  <div class="right_column">
+    <mat-card class="big-card">
+      <h2>Bond Details</h2>
+      <mat-card class="container">
+        <mat-tab-group mat-align-tabs="start">
+          <mat-tab label="Grafico idk">
+            Grafico Random XD
+          </mat-tab>
+          <mat-tab label="Info numeros y asi">
+            Numeritos y asi
+          </mat-tab>
+          <mat-tab label="Otro grafico o no se">
+            Otro grafico o no se
+          </mat-tab>
+        </mat-tab-group>
+        
+      </mat-card>
+    </mat-card>
+  </div>
+</div>

@@ -10,6 +10,9 @@ import online.fimbi.Entities.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+	@Query(value = "SELECT * FROM _user u WHERE u.username=:username", nativeQuery = true)
+	User getByUsername(String username);
+
 	@Query(value = "SELECT u.password FROM _user u WHERE u.username=:username", nativeQuery = true)
 	Optional<String> get_password_username(String username);
 
