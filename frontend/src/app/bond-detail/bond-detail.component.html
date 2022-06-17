@@ -20,6 +20,10 @@
           {{issuer.description}}
           </p>
         </mat-card-content>
+          <mat-card-actions align="end">
+            <button mat-button >Share</button>
+            <button mat-button (click)="purchase_bond()" >Purchase</button>
+          </mat-card-actions>
       </mat-card>
       
     </mat-card>
@@ -30,11 +34,25 @@
       <h2>Bond Details</h2>
       <mat-card class="container">
         <mat-tab-group mat-align-tabs="start">
-          <mat-tab label="Grafico idk">
-            Grafico Random XD
-          </mat-tab>
-          <mat-tab label="Info numeros y asi">
-            Numeritos y asi
+          <mat-tab label="Información">
+            <mat-list>
+              <mat-list-item>
+                <b>Bond Value</b>: {{formatMoney(unit_value)}}
+              </mat-list-item>
+              <mat-list-item>
+                <b>Total Value</b>: {{formatMoney(bond.nominal_value)}}
+              </mat-list-item>
+
+              <mat-list-item>
+                <b>Duration</b>: {{bond.due_date}}
+              </mat-list-item>
+              <mat-list-item>
+                <b>VAN</b>: Calcular en el backend
+              </mat-list-item>
+              <mat-list-item>
+                <b>TIR</b>: Calcular en el backend
+              </mat-list-item>
+            </mat-list>
           </mat-tab>
           <mat-tab label="Otro grafico o no se">
             Otro grafico o no se

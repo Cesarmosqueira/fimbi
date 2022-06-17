@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {Bond, Purchase} from '../models/entities-model';
 import {BondsService} from '../services/bonds.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,7 +12,7 @@ import {BondsService} from '../services/bonds.service';
 export class HomeComponent implements OnInit {
   bonds: Bond[];
   purchases: Purchase[];
-  displayedColumns: string[] = ['Issuer', 'Value', 'Interest Rate', 'Quantity', 'Detail'];
+  displayedColumns: string[] = ['Issuer', 'Value', 'Interest', 'Quantity', 'Detail'];
   today = new Date();
 
   // capitalization_rate: string;
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit {
   goToPage(pageName:string){
     this.router.navigate([`${pageName}`]);
   }
+
   ngOnInit(): void {
     this.retrieveBonds();
     this.retrievePurchases();

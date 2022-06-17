@@ -55,7 +55,6 @@ export class AppComponent {
   }
   handle_error() {
     this.goToPage('login');
-
   }
 
   handle_completion() {
@@ -85,5 +84,4 @@ export class AppComponent {
       this.handle_error();
     }
   }
-
 }

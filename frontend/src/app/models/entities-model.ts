@@ -3,6 +3,11 @@ export class Login {
   email : string;
   password : string;
 }
+export class LoginOptional {
+  username : string | null;
+  email : string | null;
+  password : string | null;
+}
 
 export class User {
   username : string;

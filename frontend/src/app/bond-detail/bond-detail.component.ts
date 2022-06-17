@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Bond, Issuer} from '../models/entities-model';
+import {Bond, Issuer, Login, LoginOptional} from '../models/entities-model';
 import {BondsService} from '../services/bonds.service';
 import {IssuerService} from '../services/issuer.service';
 
@@ -11,6 +11,7 @@ import {IssuerService} from '../services/issuer.service';
 })
 export class BondDetailComponent implements OnInit {
   
+  unit_value : number;
   bond_id : number;
   bond : Bond = new Bond;
   issuer : Issuer = new Issuer;
@@ -19,6 +20,9 @@ export class BondDetailComponent implements OnInit {
               private issuerService : IssuerService,
               private navigator : Router) { }
 
+  formatMoney(n : number) {
+    return "US$ " + (Math.round(n * 100) / 100).toLocaleString();
+  }
 
   goToPage(pageName:string){
     this.navigator.navigate([`${pageName}`]);
@@ -36,6 +40,7 @@ export class BondDetailComponent implements OnInit {
       next: (data) => {
         this.bond = data;
         this.load_issuer(this.bond.issuer_identifier)
+        this.unit_value = this.bond.nominal_value / this.bond.splits
       },
       error: (e) => console.error(e),
     });
@@ -48,5 +53,30 @@ export class BondDetailComponent implements OnInit {
       },
       error: (e) => console.error(e),
     })
+  }
+
+  purchase_bond() : void {
+    if (localStorage.getItem("user") ||
+        localStorage.getItem("email") && 
+        localStorage.getItem("password")) {
+      if(confirm("Confirmacion para comprar el bono por " + this.formatMoney(this.unit_value))) {
+        console.log("done");
+        let login = new LoginOptional();
+        login.username = localStorage.getItem("user") ?  localStorage.getItem("user") : "-1";
+        login.email = localStorage.getItem("email") ?  localStorage.getItem("email") : "-1";
+        login.password = localStorage.getItem("password") ?  localStorage.getItem("password") : "-1";
+        console.log(login);
+        this.bondService.purchase(login, this.bond_id).subscribe( {
+            next: (data) => { console.log(data); },
+            error: (e) => { console.error(e); }
+          }
+        )
+      } else {
+        console.log("aborted");
+      }
+    } else {
+      this.goToPage('login');
+    }
+      
   }
 }

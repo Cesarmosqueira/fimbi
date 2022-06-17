@@ -11,11 +11,17 @@ import { BondIndexComponent } from './bond-index/bond-index.component';
 import { BondDetailComponent } from './bond-detail/bond-detail.component';
 import { MatCardModule } from '@angular/material/card';
 import {HttpClientModule} from '@angular/common/http';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTableModule} from '@angular/material/table';
 import { MatChipsModule} from '@angular/material/chips';
 import { IssuerDetailComponent } from './issuer-detail/issuer-detail.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatListModule} from '@angular/material/list';
+import { BondPublishComponent } from './bond-publish/bond-publish.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -24,6 +30,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     BondIndexComponent,
     BondDetailComponent,
     IssuerDetailComponent,
+    BondPublishComponent,
   ],
   imports: [
     HttpClientModule,
@@ -37,7 +44,13 @@ import {MatTabsModule} from '@angular/material/tabs';
     ReactiveFormsModule,
     MatTableModule,
     MatChipsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatListModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

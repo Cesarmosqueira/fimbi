@@ -1,8 +1,8 @@
 import {HttpClient} from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
-import {Bond, Purchase} from '../models/entities-model';
+import {Bond, FimbiResponse, LoginOptional, Purchase} from '../models/entities-model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +25,14 @@ export class BondsService {
 
   getLastPurchases(n : number): Observable<Purchase[]> {
     return this.http.get<Purchase[]>(`${this.apiBase}/bonds/purchases/${n}`);
+  }
+
+  purchase(login : LoginOptional, bond_id : number) : Observable<FimbiResponse> {
+    return this.http.post<FimbiResponse>(`${this.apiBase}/users/adquire_bond/\?bond_id\=${bond_id}`, login);
+  }
+
+  publish(bond : Bond) : Observable<Bond> {
+    return this.http.post<Bond>(`${this.apiBase}/bonds`, bond);
+
   }
 }
