@@ -1,0 +1,28 @@
+<section class="profile">
+    <mat-card class="card">
+      <h4><b>User Information</b></h4>
+        <mat-card class="profile__info" color="secondary">
+          <img class="profile__picture" src="{{user.image_url}}" alt="profile_picture">
+            <p><span class="bold">Username:</span> {{user.username}}</p>
+            <p><span class="bold">Email:</span> {{user.email}}</p>
+            <p><span class="bold">Age:</span> {{age}}</p>
+        </mat-card>
+
+  <mat-card-actions>
+    <button mat-button="primary" class="main_btn" (click)="logout()">
+      Log out
+    </button>
+  </mat-card-actions>
+    </mat-card>
+    <mat-card class="card">
+        <h4><b>Bonds Purchased</b></h4>
+        <mat-card class="profile__bonds" color="secondary">
+          <div class="bond__list" *ngFor="let bond of bonds">
+              <button mat-button (click)="goToPage('bond/' + bond.id)"> {{bond.issuer_identifier}} </button>
+          </div>
+          <div *ngIf="emptyBonds()">
+            There are no bond purchased
+          </div>
+        </mat-card>
+    </mat-card>
+</section>

@@ -1,0 +1,87 @@
+<mat-card class="register_card">
+  <p>
+    <mat-card-title>Register</mat-card-title>
+    <mat-card-subtitle>Welcome!</mat-card-subtitle>
+  </p>
+
+  <div class="form-control">
+  <form
+    #formDirective="ngForm"
+    (ngSubmit)="onRegister()"
+  >
+    <mat-form-field appearance="legacy">
+      <mat-label>Username</mat-label>
+      <input matInput
+      name="username"
+      [(ngModel)]="user.username"
+      #username="ngModel"
+      #input maxlength="32"
+      required>
+      <mat-icon matSuffix>person</mat-icon>
+      <mat-hint align="end">{{input.value?.length || 0}}/32</mat-hint>
+    </mat-form-field><br>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Email</mat-label>
+      <input matInput
+      name="email"
+      [(ngModel)]="user.email"
+      #email="ngModel"
+      required>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field><br>
+
+    <mat-form-field appearance="legacy" class="pass_field">
+      <mat-label>Password</mat-label>
+      <input matInput
+      name="password"
+      type="password"
+      #input maxlength="32"
+      [(ngModel)]="user.password"
+      #password="ngModel"
+      required>
+      <mat-icon matSuffix>password</mat-icon>
+      <mat-hint align="end">{{input.value?.length || 0}}/32</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="legacy" class="pass_field">
+      <mat-label>Confirm</mat-label>
+      <input matInput type="password">
+      <mat-icon matSuffix>password</mat-icon>
+    </mat-form-field><br>
+    <mat-hint class="pass_hint">Use 8 or more characters and all that jazz</mat-hint>
+    <br>
+    <mat-form-field appearance="legacy">
+      <mat-label>Birth date</mat-label>
+      <input  matInput [matDatepicker]="picker"
+      name="birth_date"
+      [(ngModel)]="user.birth_date"
+      #birth_date="ngModel"
+      birth_date
+      required>
+      <mat-hint>MM/dd/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <br>
+    <mat-form-field appearance="legacy">
+      <mat-label>Image Url</mat-label>
+      <input matInput
+      name="image_url"
+      [(ngModel)]="user.image_url"
+      #email="ngModel">
+      <mat-icon matSuffix>image</mat-icon>
+    </mat-form-field>
+
+  <mat-card-actions>
+    <button mat-button="secondary" class="main_btn"
+      (click)="goToPage('login')">
+      Login Instead
+    </button>
+    <button mat-button="secondary" class="main_btn" type="submit">
+      Register
+    </button>
+  </mat-card-actions>
+</form>
+</div>
+</mat-card>
+<br>

@@ -1,0 +1,92 @@
+<div class="home">
+
+  <div class="left_column">
+    <mat-card class="big-card">
+      <mat-card class="card">
+          <h2>Latest Bonds Published</h2>
+
+          <table mat-table [dataSource]="bonds" class="mat-elevation-z8 demo-table">
+
+            <!-- Issuer Column -->
+            <ng-container matColumnDef="Issuer">
+              <th mat-header-cell *matHeaderCellDef> Issuer </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-button (click)="goToPage('i/' + element.issuer_identifier)"> 
+                  {{element.issuer_identifier}}
+                </button>
+              </td>
+            </ng-container>
+
+            <!-- Value Column -->
+            <ng-container matColumnDef="Value">
+              <th mat-header-cell *matHeaderCellDef> Value </th>
+              <td mat-cell *matCellDef="let element"> {{(element.nominal_value/1000000).toPrecision(2)}}M </td>
+            </ng-container>
+
+            <!-- Interest Column -->
+            <ng-container matColumnDef="Interest">
+              <th mat-header-cell *matHeaderCellDef> Interest </th>
+              <td mat-cell *matCellDef="let element"> {{display_interest(element)}}{{element.interest_rate != -1 ? '%' : ''}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Quantity">
+              <th mat-header-cell *matHeaderCellDef> Quantity </th>
+              <td mat-cell *matCellDef="let element"> {{element.splits}} </td>
+            </ng-container>
+
+            <!-- Detail Column -->
+            <ng-container matColumnDef="Detail">
+              <th mat-header-cell *matHeaderCellDef> Detail </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-raised-button color="primary" (click)="goToPage('bond/' + element.id)">Detail</button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+      </mat-card>
+      <mat-card class="card">
+          <h2>Latest Purchases</h2>
+          <mat-card *ngFor="let p of purchases">
+            {{p.userDto.username}} purchased a <a (click)="goToPage('bond/' + p.bondDto.id)">bond</a> from {{p.bondDto.issuer_identifier}}
+          </mat-card>
+
+      </mat-card>
+    </mat-card>
+  </div>
+
+  <div class="right_column">
+    <mat-card class="big-card">
+      <mat-card class="card">
+        <div class="button"> 
+            GRAFICO DE LIBOR QUE SACAREMOS DEL API DE NASDAQ
+        </div>
+      </mat-card>
+    </mat-card>
+
+    <mat-card class="big-card">
+      <mat-card class="card">
+        <h2>Latest Issuers Published</h2>
+        <div class="button"> 
+
+          <table mat-table [dataSource]="issuers" class="mat-elevation-z8 demo-table">
+            <!-- Issuer Column -->
+            <ng-container matColumnDef="ID">
+              <th mat-header-cell *matHeaderCellDef> Identifier </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-button (click)="goToPage('i/' + element.market_identifier)"> {{element.market_identifier}} </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsIssuer"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsIssuer;"></tr>
+          </table>
+        </div>
+        <button mat-raised-button color="primary" (click)="goToPage('registerissuer')" class="create_issuer">Become an Issuer</button>
+      </mat-card>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="home">
+
+  <div class="left_column">
+    <mat-card class="big-card">
+      <h2>Issuer Information</h2>
+      <mat-card class="container">
+          <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title >
+            <button mat-button (click)="goToPage('issuer/' + issuer.market_identifier)">
+              <h2>{{issuer.market_identifier}} </h2>
+            </button>
+          </mat-card-title>
+          <mat-card-subtitle>Joined on {{issuer.date_joined}}</mat-card-subtitle>
+        </mat-card-header>
+        <img class="issuer_pic"
+        mat-card-image src={{issuer.image_url}} alt={{issuer.market_identifier}}>
+        <mat-card-content>
+          <p>
+          {{issuer.description}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-button (click)="purchase_bond()" >Purchase</button>
+        </mat-card-actions>
+
+        <mat-error *ngIf="submitted && error" class="alert alert-danger mt-3">
+          Not purchased: {{response}}
+        </mat-error>
+
+        <div *ngIf="submitted && !error" style="color: green;">
+          Purchase Succesfull: {{response}}
+        </div>
+      </mat-card>
+    </mat-card>
+  </div>
+
+  <div class="right_column">
+    <mat-card class="big-card">
+      <h2>Bond Details</h2>
+      <mat-card class="container">
+        <mat-tab-group mat-align-tabs="start">
+          <mat-tab label="Información">
+            <mat-list>
+              <mat-list-item>
+                <b>Bond Value</b>: {{formatMoney(unit_value)}}
+              </mat-list-item>
+              <mat-list-item>
+                <b>Total Value</b>: {{formatMoney(bond.nominal_value)}}
+              </mat-list-item>
+
+              <mat-list-item>
+                <b>Duration</b>: {{bond.due_date}}
+              </mat-list-item>
+              <mat-list-item>
+                <b>VAN</b>: Calcular en el backend
+              </mat-list-item>
+              <mat-list-item>
+                <b>TIR</b>: Calcular en el backend
+              </mat-list-item>
+            </mat-list>
+          </mat-tab>
+          <mat-tab label="Otro grafico o no se">
+            Otro grafico o no se
+          </mat-tab>
+        </mat-tab-group>
+        
+      </mat-card>
+    </mat-card>
+  </div>
+</div>

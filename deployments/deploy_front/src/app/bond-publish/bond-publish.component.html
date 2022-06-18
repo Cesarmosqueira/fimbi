@@ -1,0 +1,108 @@
+<mat-card class="postbond_card"  color="primary">
+  <p>
+    <mat-card-title>Post Bond</mat-card-title>
+  </p>
+  <form autocomplete="off" (ngSubmit)="postbond()" #bondForm="ngForm">
+    <mat-form-field appearance="legacy" class="text_box">
+      <mat-label>Issuer</mat-label>
+      <input matInput
+        name="issuer"
+        [(ngModel)]="bond.issuer_identifier"
+        #issuer="ngModel"
+        required>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill" class="text_box">
+      <mat-label>Capitalization</mat-label>
+      <mat-select [(ngModel)]="selectedCapitalization" name="food">
+        <mat-option [value]="1"> Daily </mat-option>
+        <mat-option [value]="2"> Monthly </mat-option>
+        <mat-option [value]="3"> Anually </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="legacy" class="text_box">
+      <mat-label>Due date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="bond.due_date" name="DueDate">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+
+    <br>
+    <mat-radio-group (change)="onChange($event)">
+      <mat-radio-button [value]="1" [checked]="true" class="option">Fixed Interest</mat-radio-button>
+      <mat-radio-button [value]="0" class="option">External Interest</mat-radio-button>
+    </mat-radio-group>
+
+    <br>
+    <div *ngIf="selectedValue === 0">
+      <mat-form-field appearance="legacy" class="text_box">
+        <mat-label>External Interest Rate</mat-label>
+        <input matInput
+          name="ExternalInterestRate"
+          [(ngModel)]="bond.external_interest_rate"
+          #capitalization="ngModel"
+          class="text_box"
+          required>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="selectedValue === 1 || first">
+      <mat-form-field appearance="legacy" class="text_box">
+        <mat-label>Interest Rate (%)</mat-label>
+        <input matInput
+          type="number" step="0.01"
+          name="InterestRate"
+          [(ngModel)]="bond.interest_rate"
+          #capitalization="ngModel"
+          class="text_box"
+          required>
+      </mat-form-field>
+    </div>
+
+    <br>
+    <mat-form-field appearance="legacy" class="text_box">
+      <mat-label>Total Value</mat-label>
+      <input matInput
+        name="TotalValue"
+        [(ngModel)]="bond.nominal_value"
+        #capitalization="ngModel"
+        class="text_box"
+        required>
+    </mat-form-field>
+
+    <br>
+    <mat-form-field appearance="legacy" class="text_box">
+      <mat-label>Ammount of Bonds</mat-label>
+      <input matInput
+        name="splits"
+        [(ngModel)]="bond.splits"
+        #capitalization="ngModel"
+        class="text_box"
+        required>
+    </mat-form-field>
+    <br>
+    <mat-card-actions>
+      <button mat-button="secondary" type="submit">
+        <h3>Post</h3>
+      </button>
+
+    </mat-card-actions>
+
+    <mat-error *ngIf="submitted && error" class="alert alert-danger mt-3">
+      {{error_msg}}
+    </mat-error>
+
+
+    <div *ngIf="submitted && !error" style="color: green;">
+      Bond post succesfull
+    </div>
+
+
+  </form>
+
+</mat-card>

@@ -1,0 +1,31 @@
+<mat-toolbar color="primary" class="header_toolbar">
+  <mat-toolbar-row class="upper_bar">
+        <button mat-button class="logo_button"
+          (click)="goToPage('')">
+          <img src="/assets/fibilogo-cropped.svg"/>
+        </button>
+      <span class="example-spacer"></span>
+      {{navtitle}}
+
+  </mat-toolbar-row>
+
+  <mat-toolbar-row>
+    <span class="example-spacer"></span>
+    <button mat-button aria-label="Home page" class="menu_button" (click)="goToPage('')">
+      <mat-icon>homeoutline</mat-icon> Home
+    </button>
+    <span class="example-spacer"></span>
+    <button mat-button aria-label="Bond index" class="menu_button" (click)="goToPage('bondindex')">
+      <mat-icon>storefront</mat-icon> Bond Index
+    </button>
+    <span class="example-spacer"></span>
+    <button mat-button aria-label="Profile" class="menu_button" (click)="goToProfile()">
+      <mat-icon>person_pin</mat-icon> {{profile_button}}
+      <!---<mat-icon>people_outline</mat-icon>--->
+    </button>
+    <span class="example-spacer"></span>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

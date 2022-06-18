@@ -1,0 +1,19 @@
+.register_card {
+  margin-top: 10px;
+  text-align: center;
+  min-height: auto;
+  min-width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 27em;
+}
+
+.mat-form-field {
+  width: 80%;
+  max-width: 600px;
+}
+
+.pass_field, .pass_hint {
+  width: 35%;
+  margin: 0 5% 0 5%;
+}

@@ -1,0 +1,52 @@
+<mat-card class="login_card"  color="primary">
+  <p>
+    <mat-card-title>Login</mat-card-title>
+  </p>
+  <form autocomplete="off" (ngSubmit)="onLogin()" #loginForm="ngForm">
+    <p>
+    <mat-form-field appearance="legacy" class="text_box">
+      <mat-label>Username or email</mat-label>
+      <input matInput
+        name="username"
+        [(ngModel)]="login.username"
+        #username="ngModel"
+        required>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="legacy" class="text_box">
+      <mat-label>Password</mat-label>
+      <input matInput
+        name="password"
+        type="password"
+        [(ngModel)]="login.password"
+        #password="ngModel"
+        class="text_box"
+        required>
+      <mat-icon matSuffix>password</mat-icon>
+    </mat-form-field>
+    </p>
+    <mat-card-actions>
+        <button mat-button="primary" type="submit">
+          <h2>Login</h2></button>
+        <button mat-button
+          (click)="goToPage('signup')">
+          <h3>Register</h3>
+        </button>
+    </mat-card-actions>
+
+    <mat-error *ngIf="wrong_username && !success && submitted" class="alert alert-danger mt-3">
+      Incorrect username or email
+    </mat-error>
+
+    <mat-error *ngIf="!wrong_username && !success && submitted" class="alert alert-danger mt-3">
+      Incorrect password
+    </mat-error>
+
+    <div *ngIf="submitted && success" style="color: green;">
+      Login correctly
+    </div>
+
+  </form>
+
+</mat-card>

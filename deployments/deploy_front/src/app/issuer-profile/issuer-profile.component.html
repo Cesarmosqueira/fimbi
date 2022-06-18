@@ -1,0 +1,26 @@
+<section class="profile">
+    <mat-card class="card">
+      <h4><b>User Information</b></h4>
+        <mat-card class="profile__info" color="secondary">
+          <img class="profile__picture" src="{{issuer.image_url}}" alt="profile_picture">
+          <p><span class="bold">Identifier:</span> {{issuer.market_identifier}}</p>
+            <p><span class="bold">Description:</span> {{issuer.description}}</p>
+            <p><span class="bold">Joined:</span> {{years == 0 ? 'This year' : years + " years ago"}}</p>
+        </mat-card>
+
+  <mat-card-actions>
+
+  </mat-card-actions>
+    </mat-card>
+    <mat-card class="card">
+        <h4><b>Bonds Published</b></h4>
+        <mat-card class="profile__bonds" color="secondary">
+          <div class="bond__list" *ngFor="let bond of bonds">
+              <button mat-button (click)="goToPage('bond/' + bond.id)"> {{bond.issuer_identifier}} </button>
+          </div>
+          <div *ngIf="emptyBonds()">
+            There are no bond purchased
+          </div>
+        </mat-card>
+    </mat-card>
+</section>

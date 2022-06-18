@@ -1,0 +1,31 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.header_toolbar {
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+.upper_bar {
+  justify-content: left;
+  align-items: center;
+  height: 70px;
+}
+
+.logo_btn {
+    min-width:500px;
+}
+
+img {
+  min-width: 55px;
+  transform: rotate(90deg);
+  margin: 10px;
+  width: 50px;
+  object-fit: fill;
+}
+
+.menu_button {
+  padding: 10px 5%;
+}
