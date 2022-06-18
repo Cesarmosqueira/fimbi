@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import online.fimbi.Common.EntityDtoConverter;
 import online.fimbi.Dto.BondDto;
 import online.fimbi.Dto.IssuerDto;
+import online.fimbi.Dto.IssuerDtoRes;
 import online.fimbi.Services.IssuerService;
 
 @CrossOrigin(origins = "*")
@@ -48,8 +49,8 @@ public class IssuerController {
 	}
 
 	@GetMapping("{identifier}")
-	public ResponseEntity<IssuerDto> getIssuer(@PathVariable String identifier) {
-		IssuerDto issuerDto = issuerService.getByIdentifier(identifier);
+	public ResponseEntity<IssuerDtoRes> getIssuer(@PathVariable String identifier) {
+		IssuerDtoRes issuerDto = issuerService.getByIdentifier(identifier);
 		return new ResponseEntity<>(issuerDto, HttpStatus.OK);
 	}
 

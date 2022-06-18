@@ -45,7 +45,7 @@
     </mat-form-field>
     <mat-form-field appearance="legacy" class="pass_field">
       <mat-label>Confirm</mat-label>
-      <input matInput>
+      <input matInput type="password">
       <mat-icon matSuffix>password</mat-icon>
     </mat-form-field><br>
     <mat-hint class="pass_hint">Use 8 or more characters and all that jazz</mat-hint>
@@ -62,6 +62,15 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+  <br>
+    <mat-form-field appearance="legacy">
+      <mat-label>Image Url</mat-label>
+      <input matInput
+      name="image_url"
+      [(ngModel)]="user.image_url"
+      #email="ngModel">
+      <mat-icon matSuffix>image</mat-icon>
+    </mat-form-field>
 
   <mat-card-actions>
     <button mat-button="secondary" class="main_btn"

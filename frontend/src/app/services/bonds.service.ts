@@ -23,6 +23,14 @@ export class BondsService {
     return this.http.get<Bond[]>(`${this.apiBase}/bonds/latest/${n}`);
   }
 
+  getByUsername(username : String) : Observable<Bond[]> {
+    return this.http.get<Bond[]>(`${this.apiBase}/bonds/user/${username}`);
+  }
+
+  getByIssuer(identifier : String) : Observable<Bond[]> {
+    return this.http.get<Bond[]>(`${this.apiBase}/bonds/issuer/${identifier}`);
+  }
+
   getLastPurchases(n : number): Observable<Purchase[]> {
     return this.http.get<Purchase[]>(`${this.apiBase}/bonds/purchases/${n}`);
   }
@@ -33,6 +41,6 @@ export class BondsService {
 
   publish(bond : Bond) : Observable<Bond> {
     return this.http.post<Bond>(`${this.apiBase}/bonds`, bond);
-
   }
+
 }

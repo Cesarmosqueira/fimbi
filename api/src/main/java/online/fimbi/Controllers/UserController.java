@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,6 +42,12 @@ public class UserController {
 	public ResponseEntity<FimbiResponse> login(@RequestBody LoginRequest loginRequest) throws FimbiException {
 		FimbiResponse response = userService.login_user(loginRequest);
 		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+	@GetMapping("{username}")
+	public ResponseEntity<UserDto> getBondsByUsername(@PathVariable String username) {
+		UserDto userDto = userService.getUserByUsername(username);
+		return new ResponseEntity<>(userDto, HttpStatus.OK);
 	}
 
 	@PostMapping("adquire_bond")

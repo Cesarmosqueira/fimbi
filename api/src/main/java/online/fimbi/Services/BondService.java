@@ -12,6 +12,7 @@ import online.fimbi.Common.EntityDtoConverter;
 import online.fimbi.Dto.BondDto;
 import online.fimbi.Dto.PurchaseDto;
 import online.fimbi.Entities.Bond;
+import online.fimbi.Entities.Issuer;
 import online.fimbi.Entities.User;
 import online.fimbi.Entities.UserxBond;
 import online.fimbi.Exception.FimbiException;
@@ -86,5 +87,19 @@ public class BondService {
 		}
 		return out;
 
+	}
+
+	public List<BondDto> getBondsByUsername(String username) {
+		User user = userRepository.getByUsername(username)
+				.orElseThrow(() -> new FimbiException("User '" + username + "' not found"));
+		List<Bond> bonds = bondRepository.bondsByUserId(user.getId());
+		return entityDtoConverter.convertBondsToDto(bonds);
+	}
+
+	public List<BondDto> getBondsByIdentifier(String identifier) {
+		Issuer issuer = issuerRepository.getByIdentifier(identifier)
+				.orElseThrow(() -> new FimbiException("Issuer '" + identifier + "' not found"));
+		List<Bond> bonds = bondRepository.bondsByIssuerId(issuer.getId());
+		return entityDtoConverter.convertBondsToDto(bonds);
 	}
 }

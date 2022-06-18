@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import online.fimbi.Common.EntityDtoConverter;
 import online.fimbi.Dto.FimbiResponse;
 import online.fimbi.Dto.LoginRequest;
 import online.fimbi.Dto.UserDto;
@@ -29,11 +30,19 @@ public class UserService {
 	@Autowired
 	BondRepository bondRepository;
 
+	@Autowired
+	EntityDtoConverter entityDtoConverter;
+
 	public FimbiResponse register_user(UserDto userDto) {
 		User user = new User(userDto);
 		userRepository.save(user);
 		return new FimbiResponse("success", 1);
 
+	}
+
+	public User userByUsername(String username) throws FimbiException {
+		return userRepository.getByUsername(username)
+				.orElseThrow(() -> new FimbiException(username + " not found"));
 	}
 
 	public FimbiResponse login_user(LoginRequest loginRequest) throws FimbiException {
@@ -65,7 +74,8 @@ public class UserService {
 				.orElseThrow(() -> new FimbiException("bond doesn't exist"));
 		int bond_splits = bond.getSplits();
 		if (bond_occurences + 1 <= bond_splits || bond.getAvailable() == 1) {
-			User u = userRepository.getByUsername(username);
+			User u = userRepository.getByUsername(username)
+					.orElseThrow(() -> new FimbiException(username + " not found"));
 
 			UserxBond relation = new UserxBond();
 			relation.setBond_id(bond.getId());
@@ -83,5 +93,11 @@ public class UserService {
 					+ " instances left for bond #" + bond.getId(), 1);
 		}
 		throw new FimbiException("There are no instances left for bond #" + bond.getId());
+	}
+
+	public UserDto getUserByUsername(String username) {
+		User user = userRepository.getByUsername(username)
+				.orElseThrow(() -> new FimbiException("'" + username + "' not found"));
+		return entityDtoConverter.convertUserToDto(user);
 	}
 }

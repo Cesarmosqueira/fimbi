@@ -30,4 +30,10 @@ public interface BondRepository extends JpaRepository<Bond, Long> {
 	@Query(value = "UPDATE bond SET available = 0 WHERE id=:bond_id", nativeQuery = true)
 	void disable_bond(Long bond_id);
 
+	@Query(value = "SELECT b.id, b.available, b.capitalization_rate, b.due_date, b.emission_date, b.external_interest_rate, b.interest_rate, b.issuer_id, b.nominal_value, b.splits FROM userxbond ub JOIN bond b ON ub.bond_id = b.id WHERE ub.user_id=:user_id", nativeQuery = true)
+	List<Bond> bondsByUserId(Long user_id);
+
+	@Query(value = "SELECT b.id, b.available, b.capitalization_rate, b.due_date, b.emission_date, b.external_interest_rate, b.interest_rate, b.issuer_id, b.nominal_value, b.splits FROM userxbond ub JOIN bond b ON ub.bond_id = b.id WHERE b.issuer_id=:issuer_id", nativeQuery = true)
+	List<Bond> bondsByIssuerId(Long issuer_id);
+
 }

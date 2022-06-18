@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import online.fimbi.Dto.BondDto;
 import online.fimbi.Dto.IssuerDto;
+import online.fimbi.Dto.IssuerDtoRes;
 import online.fimbi.Dto.UserDto;
 import online.fimbi.Entities.Bond;
 import online.fimbi.Entities.Issuer;
@@ -39,6 +40,10 @@ public class EntityDtoConverter {
 
 	public IssuerDto convertIssuerToDto(Issuer issuer) {
 		return modelMapper.map(issuer, IssuerDto.class);
+	}
+
+	public IssuerDtoRes convertIssuerToDtoRes(Issuer issuer) {
+		return modelMapper.map(issuer, IssuerDtoRes.class);
 	}
 
 	public List<IssuerDto> convertIssuersToDto(List<Issuer> issuers) {

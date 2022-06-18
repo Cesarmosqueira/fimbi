@@ -42,6 +42,18 @@ public class BondController {
 		return new ResponseEntity<>(bondDto, HttpStatus.OK);
 	}
 
+	@GetMapping("user/{username}")
+	public ResponseEntity<List<BondDto>> getBondsByUsername(@PathVariable String username) {
+		List<BondDto> bondsDto = bondService.getBondsByUsername(username);
+		return new ResponseEntity<>(bondsDto, HttpStatus.OK);
+	}
+
+	@GetMapping("issuer/{identifier}")
+	public ResponseEntity<List<BondDto>> getBondsByIssuer(@PathVariable String identifier) {
+		List<BondDto> bondsDto = bondService.getBondsByIdentifier(identifier);
+		return new ResponseEntity<>(bondsDto, HttpStatus.OK);
+	}
+
 	@GetMapping("/latest/{size}") // ask for n (5)
 	public ResponseEntity<List<BondDto>> latest_Bonds(@PathVariable int size) {
 		List<BondDto> latest_bonds = bondService.get_lastest_bonds(size);
@@ -53,5 +65,4 @@ public class BondController {
 		List<PurchaseDto> latest_purchases = bondService.get_lastest_purchases(size);
 		return new ResponseEntity<>(latest_purchases, HttpStatus.OK);
 	}
-
 }

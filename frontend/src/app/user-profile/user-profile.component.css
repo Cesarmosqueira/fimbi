@@ -1,0 +1,29 @@
+.profile{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+}
+.card{
+  color: #dae1ed;
+    padding: 2rem;
+    background-color: #3f51b5;
+}
+.profile__info, .profile__bonds{
+    padding: 2rem;
+    background-color: #232223;
+    color: white;
+}
+.profile__picture{
+    border-radius: 50%;
+    border: 1px dashed black;
+    margin: 2rem 0;
+}
+.bold{
+    font-weight: bolder;
+    font-size: 120%;
+}
+.bond__list{
+    list-style: none;
+}

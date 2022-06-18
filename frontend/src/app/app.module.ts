@@ -15,7 +15,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTableModule} from '@angular/material/table';
 import { MatChipsModule} from '@angular/material/chips';
-import { IssuerDetailComponent } from './issuer-detail/issuer-detail.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
 import { BondPublishComponent } from './bond-publish/bond-publish.component';
@@ -25,6 +24,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import { IssuerRegisterComponent } from './issuer-register/issuer-register.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { IssuerProfileComponent } from './issuer-profile/issuer-profile.component';
 
 @NgModule({
   declarations: [
@@ -32,9 +33,10 @@ import { IssuerRegisterComponent } from './issuer-register/issuer-register.compo
     HomeComponent,
     BondIndexComponent,
     BondDetailComponent,
-    IssuerDetailComponent,
     BondPublishComponent,
     IssuerRegisterComponent,
+    UserProfileComponent,
+    IssuerProfileComponent,
   ],
   imports: [
     HttpClientModule,

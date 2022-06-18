@@ -30,11 +30,12 @@ export class AppComponent {
 
   ngOnInit(): void {
     let page = this.router.url.split('/', 2)[1];
-    if (page) {
-      this.navtitle = titleCaseWord(page);
+    if (localStorage.getItem("user")) {
+      this.navtitle = "Logged as " + localStorage.getItem("user");
     } else {
-      this.navtitle = "Home";
+      this.navtitle = "Not logged";
     }
+
     this.load_button();
   }
 
@@ -45,9 +46,7 @@ export class AppComponent {
       this.profile_button = "Profile"
     } else {
       this.profile_button = "Login"
-
     }
-
   }
 
   handle_data(data : any) {
@@ -57,12 +56,6 @@ export class AppComponent {
     this.goToPage('login');
   }
 
-  handle_completion() {
-
-    if(this.loginResponse.code == 1) {
-      this.goToPage("u/penemene");
-    }
-  }
 
   goToProfile() : void {
     if (localStorage.getItem("user") ||
@@ -76,12 +69,11 @@ export class AppComponent {
 
       this.authService.signIn(login)
             .subscribe({
-          next: (data) => { this.handle_data(data) },
-          error: () => { this.handle_error()},
-          complete: () => { this.handle_completion()}}
+          next: () => { this.goToPage(`u/${login.username}`); },
+          error: (e) => { console.error(e); }}
       );
     } else {
-      this.handle_error();
+      this.goToPage("login");
     }
   }
 }

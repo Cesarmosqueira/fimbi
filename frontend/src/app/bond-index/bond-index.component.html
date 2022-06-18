@@ -8,7 +8,10 @@
             <ng-container matColumnDef="Issuer">
               <th mat-header-cell *matHeaderCellDef> Issuer </th>
               <td mat-cell *matCellDef="let element">
-                <button mat-button> {{element.issuer_identifier}} </button>
+
+              <button mat-button (click)="goToPage('i/' + element.issuer_identifier)">
+                {{element.issuer_identifier}} 
+              </button>
               </td>
             </ng-container>
 

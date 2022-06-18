@@ -18,25 +18,6 @@ export class HomeComponent implements OnInit {
   displayedColumnsIssuer: string[] = ['ID'];
   today = new Date();
 
-  // capitalization_rate: string;
-  // due_date: Date;
-  // external_interest_rate: string;
-  // interest_rate: number;
-  // issuer_identifier: string;
-  // nominal_value: number;
-  // splits: number;
-
-  // diff_in_days(date : Date) {
-  //   console.log(this.purchases);
-  //   let diff = Math.abs(this.today.getTime() - date.getTime());
-  //   let diffDays = Math.ceil(diff / (1000 * 3600 * 24)) - 1;
-  //   if (diffDays == 0) {
-  //     return 'Today';
-  //   } else {
-  //     return diffDays + " days ago"
-  //   }
-  // }
-
   constructor(private router : Router, 
               private bondService : BondsService,
               private issuerService : IssuerService) { }

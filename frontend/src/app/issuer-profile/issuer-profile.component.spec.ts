@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IssuerDetailComponent } from './issuer-detail.component';
+import { IssuerProfileComponent } from './issuer-profile.component';
 
-describe('IssuerDetailComponent', () => {
-  let component: IssuerDetailComponent;
-  let fixture: ComponentFixture<IssuerDetailComponent>;
+describe('IssuerProfileComponent', () => {
+  let component: IssuerProfileComponent;
+  let fixture: ComponentFixture<IssuerProfileComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IssuerDetailComponent ]
+      declarations: [ IssuerProfileComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IssuerDetailComponent);
+    fixture = TestBed.createComponent(IssuerProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

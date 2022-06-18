@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import online.fimbi.Common.EntityDtoConverter;
 import online.fimbi.Dto.BondDto;
 import online.fimbi.Dto.IssuerDto;
+import online.fimbi.Dto.IssuerDtoRes;
 import online.fimbi.Entities.Bond;
 import online.fimbi.Entities.Issuer;
 import online.fimbi.Exception.FimbiException;
@@ -36,10 +37,10 @@ public class IssuerService {
 	}
 
 	@Transactional
-	public IssuerDto getByIdentifier(String identifier) throws FimbiException {
+	public IssuerDtoRes getByIdentifier(String identifier) throws FimbiException {
 		Issuer issuer = issuerRepository.getByIdentifier(identifier)
 				.orElseThrow(() -> new FimbiException(identifier + " not found"));
-		return entityDtoConverter.convertIssuerToDto(issuer);
+		return entityDtoConverter.convertIssuerToDtoRes(issuer);
 	}
 
 	@Transactional

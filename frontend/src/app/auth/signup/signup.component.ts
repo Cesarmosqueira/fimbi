@@ -23,7 +23,6 @@ export class SignupComponent implements OnInit {
   }
 
   onRegister() {
-    this.user.image_url = "fimbi";
     console.log(this.user);
     this.authService.signUp(this.user)
           .subscribe({
