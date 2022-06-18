@@ -20,8 +20,11 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
 import { BondPublishComponent } from './bond-publish/bond-publish.component';
 import {MatInputModule} from '@angular/material/input';
-import {MatNativeDateModule} from '@angular/material/core';
+import {MatNativeDateModule, MatOptionModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import { IssuerRegisterComponent } from './issuer-register/issuer-register.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     BondDetailComponent,
     IssuerDetailComponent,
     BondPublishComponent,
+    IssuerRegisterComponent,
   ],
   imports: [
     HttpClientModule,
@@ -50,7 +54,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatRadioModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Bond, Issuer, Login, LoginOptional} from '../models/entities-model';
-import {BondsService} from '../services/bonds.service';
-import {IssuerService} from '../services/issuer.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Bond, Issuer, LoginOptional } from '../models/entities-model';
+import { BondsService } from '../services/bonds.service';
+import { IssuerService } from '../services/issuer.service';
 
 @Component({
   selector: 'app-bond-detail',
@@ -11,6 +11,9 @@ import {IssuerService} from '../services/issuer.service';
 })
 export class BondDetailComponent implements OnInit {
   
+  error: boolean;
+  response :  string;
+  submitted: boolean;
   unit_value : number;
   bond_id : number;
   bond : Bond = new Bond;
@@ -33,6 +36,10 @@ export class BondDetailComponent implements OnInit {
       this.bond_id = Number(optional);
       this.load_bond();
     }
+
+    this.error = false;
+    this.submitted = false;
+    this.response = "";
   }
 
   load_bond() : void {
@@ -67,8 +74,18 @@ export class BondDetailComponent implements OnInit {
         login.password = localStorage.getItem("password") ?  localStorage.getItem("password") : "-1";
         console.log(login);
         this.bondService.purchase(login, this.bond_id).subscribe( {
-            next: (data) => { console.log(data); },
-            error: (e) => { console.error(e); }
+            next: (data) => { 
+              console.log(data); 
+              this.submitted = true; 
+              this.error = false;
+              this.response = data.description;
+            },
+            error: (e) => { 
+              console.error(e);
+              this.submitted = true; 
+              this.error = true;
+              this.response = e.error.message;
+            }
           }
         )
       } else {

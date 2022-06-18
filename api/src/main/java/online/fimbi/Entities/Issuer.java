@@ -28,16 +28,16 @@ public class Issuer {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(nullable = false, length = 8)
+	@Column(nullable = false, length = 8, unique = true)
 	private String market_identifier; // (ISO 10383)
 
-	@Column(nullable = false, length = 1024)
+	@Column(nullable = false, length = 8192)
 	private String description;
 
 	@Temporal(TemporalType.DATE)
 	private Date date_joined;
 
-	@Column(length = 1024)
+	@Column(length = 65536)
 	private String image_url;
 
 	@OneToMany
@@ -48,7 +48,7 @@ public class Issuer {
 	public Issuer(IssuerDto issuerDto) {
 		this.market_identifier = issuerDto.getMarket_identifier();
 		this.description = issuerDto.getDescription();
-		this.date_joined = issuerDto.getDate_joined();
+		this.date_joined = new Date();
 		this.image_url = issuerDto.getImage_url();
 	}
 

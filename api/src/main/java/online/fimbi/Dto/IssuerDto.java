@@ -1,7 +1,6 @@
 package online.fimbi.Dto;
 
 import java.nio.charset.Charset;
-import java.util.Date;
 import java.util.Random;
 
 import lombok.AllArgsConstructor;
@@ -15,7 +14,6 @@ public class IssuerDto {
 	Long id;
 	String market_identifier; // (ISO 10383)
 	String description;
-	Date date_joined;
 	String image_url;
 
 	private static String getAlphaNumericString(int n) {
@@ -54,10 +52,9 @@ public class IssuerDto {
 		String mic = getAlphaNumericString(4);
 
 		String des = "This is a random generated Issuer.";
-		Date dat = new Date();
 		String img = "https://www.kindpng.com/picc/m/231-2310451_building-clip-art-images-free-clipart-images-building.png";
 
-		IssuerDto issuerDto = new IssuerDto(Long.parseLong("0"), mic, des, dat, img);
+		IssuerDto issuerDto = new IssuerDto(Long.parseLong("0"), mic, des, img);
 		return issuerDto;
 
 	}

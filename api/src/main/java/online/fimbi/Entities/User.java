@@ -41,7 +41,7 @@ public class User {
 	@Column(nullable = false)
 	private Date birth_date;
 
-	@Column(length = 1024)
+	@Column(length = 65536)
 	private String image_url;
 
 	@OneToMany

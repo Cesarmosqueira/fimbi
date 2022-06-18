@@ -32,6 +32,12 @@ export class Bond {
   splits: number;
 }
 
+export class IssuerReq {
+  market_identifier : string;
+  description : string;
+  image_url : string;
+}
+
 export class Issuer {
   market_identifier : string;
   description : string;

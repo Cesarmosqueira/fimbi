@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {Bond, Purchase} from '../models/entities-model';
+import {Bond, Issuer, Purchase} from '../models/entities-model';
 import {BondsService} from '../services/bonds.service';
+import {IssuerService} from '../services/issuer.service';
 
 
 @Component({
@@ -12,7 +13,9 @@ import {BondsService} from '../services/bonds.service';
 export class HomeComponent implements OnInit {
   bonds: Bond[];
   purchases: Purchase[];
+  issuers : Issuer[];
   displayedColumns: string[] = ['Issuer', 'Value', 'Interest', 'Quantity', 'Detail'];
+  displayedColumnsIssuer: string[] = ['ID'];
   today = new Date();
 
   // capitalization_rate: string;
@@ -35,7 +38,16 @@ export class HomeComponent implements OnInit {
   // }
 
   constructor(private router : Router, 
-              private bondService : BondsService) { }
+              private bondService : BondsService,
+              private issuerService : IssuerService) { }
+
+  display_interest(bond : Bond) {
+    if(bond.interest_rate == -1) {
+      return bond.external_interest_rate;
+    } else {
+      return bond.interest_rate;
+    }
+  }
 
   goToPage(pageName:string){
     this.router.navigate([`${pageName}`]);
@@ -44,14 +56,13 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.retrieveBonds();
     this.retrievePurchases();
+    this.retrieveIssuers();
   }
 
   retrievePurchases() : void {
     this.bondService.getLastPurchases(5).subscribe({
       next: (data) => {
         this.purchases = data;
-        console.log(this.purchases);
-
       },
       error: (e) => console.error(e),
     });
@@ -61,6 +72,15 @@ export class HomeComponent implements OnInit {
     this.bondService.getLast(5).subscribe({
       next: (data) => {
         this.bonds = data;
+      },
+      error: (e) => console.error(e),
+    });
+  }
+
+  retrieveIssuers() : void {
+    this.issuerService.getAll().subscribe({
+      next: (data) => {
+        this.issuers = data;
       },
       error: (e) => console.error(e),
     });

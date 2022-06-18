@@ -6,7 +6,6 @@
           <h2>Latest Bonds Published</h2>
 
           <table mat-table [dataSource]="bonds" class="mat-elevation-z8 demo-table">
-
             <!-- Issuer Column -->
             <ng-container matColumnDef="Issuer">
               <th mat-header-cell *matHeaderCellDef> Issuer </th>
@@ -24,7 +23,7 @@
             <!-- Interest Column -->
             <ng-container matColumnDef="Interest">
               <th mat-header-cell *matHeaderCellDef> Interest </th>
-              <td mat-cell *matCellDef="let element"> {{element.interest_rate}}% </td>
+              <td mat-cell *matCellDef="let element"> {{display_interest(element)}}{{element.interest_rate != -1 ? '%' : ''}} </td>
             </ng-container>
 
             <!-- Symbol Column -->
@@ -39,7 +38,6 @@
               <td mat-cell *matCellDef="let element">
                 <button mat-raised-button color="primary" (click)="goToPage('bond/' + element.id)">Detail</button>
               </td>
-
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -63,6 +61,28 @@
         <div class="button"> 
             GRAFICO RANDOM XD
         </div>
+      </mat-card>
+    </mat-card>
+
+    <mat-card class="big-card">
+      <mat-card class="card">
+        <h2>Latest Issuers Published</h2>
+        <div class="button"> 
+
+          <table mat-table [dataSource]="issuers" class="mat-elevation-z8 demo-table">
+            <!-- Issuer Column -->
+            <ng-container matColumnDef="ID">
+              <th mat-header-cell *matHeaderCellDef> Identifier </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-button (click)="goToPage('register')"> {{element.market_identifier}} </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsIssuer"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsIssuer;"></tr>
+          </table>
+        </div>
+        <button mat-raised-button color="primary" (click)="goToPage('registerissuer')" class="create_issuer">Become an Issuer</button>
       </mat-card>
     </mat-card>
   </div>

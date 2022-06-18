@@ -26,9 +26,13 @@ public class IssuerService {
 	@Autowired
 	EntityDtoConverter entityDtoConverter;
 
-	public Issuer save_issuer(IssuerDto issuerDto) {
-		Issuer issuer = new Issuer(issuerDto);
-		return issuerRepository.save(issuer);
+	public Issuer save_issuer(IssuerDto issuerDto) throws FimbiException {
+		if (issuerRepository.count_issuers(issuerDto.getMarket_identifier()) == 0) {
+			Issuer issuer = new Issuer(issuerDto);
+			return issuerRepository.save(issuer);
+		} else {
+			throw new FimbiException(issuerDto.getMarket_identifier() + " is already registered");
+		}
 	}
 
 	@Transactional

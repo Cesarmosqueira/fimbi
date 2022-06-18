@@ -11,3 +11,10 @@
 .text_box {
   width: 85%;
 }
+.options {
+  width: 100%;
+}
+
+.option {
+  margin: 10px;
+}

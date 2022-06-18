@@ -20,6 +20,13 @@ export class BondIndexComponent implements OnInit {
   // nominal_value: number;
   // splits: number;
 
+  display_interest(bond : Bond) {
+    if(bond.interest_rate == -1) {
+      return bond.external_interest_rate;
+    } else {
+      return bond.interest_rate;
+    }
+  }
   constructor(private router : Router, 
               private bondService : BondsService) { }
 

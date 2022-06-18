@@ -20,12 +20,19 @@
           {{issuer.description}}
           </p>
         </mat-card-content>
-          <mat-card-actions align="end">
-            <button mat-button >Share</button>
-            <button mat-button (click)="purchase_bond()" >Purchase</button>
-          </mat-card-actions>
+        <mat-card-actions align="end">
+          <button mat-button >Share</button>
+          <button mat-button (click)="purchase_bond()" >Purchase</button>
+        </mat-card-actions>
+
+        <mat-error *ngIf="submitted && error" class="alert alert-danger mt-3">
+          Not purchased: {{response}}
+        </mat-error>
+
+        <div *ngIf="submitted && !error" style="color: green;">
+          Purchase Succesfull: {{response}}
+        </div>
       </mat-card>
-      
     </mat-card>
   </div>
 

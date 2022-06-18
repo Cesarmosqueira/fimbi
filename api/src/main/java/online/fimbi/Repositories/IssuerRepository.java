@@ -17,4 +17,7 @@ public interface IssuerRepository extends JpaRepository<Issuer, Long> {
 	@Query(value = "SELECT * FROM issuer i WHERE i.market_identifier=:market_identifier", nativeQuery = true)
 	Optional<Issuer> getByIdentifier(String market_identifier);
 
+	@Query(value = "SELECT count(*) FROM issuer i WHERE i.market_identifier=:market_identifier", nativeQuery = true)
+	int count_issuers(String market_identifier);
+
 }

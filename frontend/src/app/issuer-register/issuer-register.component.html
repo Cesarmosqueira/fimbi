@@ -1,0 +1,63 @@
+<mat-card class="register_card">
+  <p>
+    <mat-card-title>Register</mat-card-title>
+    <mat-card-subtitle>Welcome!</mat-card-subtitle>
+  </p>
+
+  <div class="form-control">
+  <form
+    #formDirective="ngForm"
+    (ngSubmit)="onRegister()"
+  >
+    <mat-form-field appearance="legacy">
+      <mat-label>Identifier</mat-label>
+      <input matInput
+      name="identifier"
+      [(ngModel)]="issuer.market_identifier"
+      #username="ngModel"
+      #input maxlength="6"
+      style="text-transform:uppercase"
+      required>
+      <mat-icon matSuffix>person</mat-icon>
+      <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
+    </mat-form-field><br>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Description</mat-label>
+      <textarea matInput
+            name="description"
+            [(ngModel)]="issuer.description"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="4"
+            cdkAutosizeMaxRows="5"></textarea>
+      <mat-icon matSuffix>description</mat-icon>
+    </mat-form-field><br>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Image Url</mat-label>
+      <input matInput
+      name="image"
+      [(ngModel)]="issuer.image_url"
+      #image="ngModel">
+      <mat-icon matSuffix>image</mat-icon>
+    </mat-form-field><br>
+
+  <mat-card-actions>
+    <button mat-button="secondary" class="main_btn" type="submit">
+      Register
+    </button>
+  </mat-card-actions>
+</form>
+
+    <mat-error *ngIf="submitted && error" class="alert alert-danger mt-3">
+      {{error_msg}}
+    </mat-error>
+
+
+    <div *ngIf="submitted && !error" style="color: green;">
+      {{issuer.market_identifier}} created succesfully
+    </div>
+</div>
+</mat-card>
+<br>
