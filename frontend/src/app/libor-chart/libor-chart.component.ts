@@ -35,7 +35,7 @@ export class LiborChartComponent implements OnInit {
     this.initChartData();
   }
   ngOnInit(): void {
-    this.http.get<any>('https://data.nasdaq.com/api/v3/datasets/OPEC/ORB.json')
+    this.http.get<any>('https://raw.githubusercontent.com/Cesarmosqueira/fimbi/master/ORB.json')
       .subscribe({
       next: (data) => {
         this.values = data.dataset.data;
@@ -60,7 +60,7 @@ export class LiborChartComponent implements OnInit {
 
     this.series = [
       {
-        name: "XYZ MOTORS",
+        name: "LIBOR",
         data: dates
       }
     ];
@@ -100,11 +100,11 @@ export class LiborChartComponent implements OnInit {
     this.yaxis = {
       labels: {
         formatter: function(val : number) {
-          return (val / 1000000).toFixed(0);
+          return (val / 1).toFixed(3);
         }
       },
       title: {
-        text: "Price"
+        text: "Value"
       }
     };
     this.xaxis = {
@@ -114,7 +114,7 @@ export class LiborChartComponent implements OnInit {
       shared: false,
       y: {
         formatter: function(val : number) {
-          return (val / 1000000).toFixed(0);
+          return (val / 1).toFixed(5);
         }
       }
     };
