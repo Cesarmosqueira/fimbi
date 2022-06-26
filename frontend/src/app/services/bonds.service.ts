@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
-import {Bond, FimbiResponse, LoginOptional, Purchase} from '../models/entities-model';
+import {Bond, BondReq, FimbiResponse, LoginOptional, Purchase} from '../models/entities-model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,8 +39,12 @@ export class BondsService {
     return this.http.post<FimbiResponse>(`${this.apiBase}/users/adquire_bond/\?bond_id\=${bond_id}`, login);
   }
 
-  publish(bond : Bond) : Observable<Bond> {
-    return this.http.post<Bond>(`${this.apiBase}/bonds`, bond);
+  publish(bond : BondReq) : Observable<BondReq> {
+    return this.http.post<BondReq>(`${this.apiBase}/bonds`, bond);
+  }
+
+  getLiborData() : Observable<any> {
+    return this.http.get<any>('https://data.nasdaq.com/api/v3/datasets/OPEC/ORB.json')
   }
 
 }

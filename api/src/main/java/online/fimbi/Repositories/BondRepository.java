@@ -11,8 +11,11 @@ import online.fimbi.Entities.Bond;
 
 @Repository
 public interface BondRepository extends JpaRepository<Bond, Long> {
-	@Query(value = "SELECT * FROM bond b WHERE b.available=1 ORDER BY b.emission_date DESC  fetch first :size rows only", nativeQuery = true)
+	@Query(value = "SELECT * FROM bond b WHERE b.available=1 ORDER BY b.id DESC  fetch first :size rows only", nativeQuery = true)
 	List<Bond> latest_bonds(int size);
+
+	@Query(value = "SELECT * FROM bond b ORDER BY b.id DESC", nativeQuery = true)
+	List<Bond> get_all_by_date();
 
 	// @Modifying
 	// @Query(value = "UPDATE bond SET splits = splits - 1 WHERE id=:bond_id",

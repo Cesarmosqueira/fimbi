@@ -1,5 +1,6 @@
 package online.fimbi.Entities;
 
+import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Set;
@@ -110,14 +111,7 @@ public class Bond {
 	@Column(nullable = false)
 	float return_rate; // IRR
 
-	@Column(nullable = false)
-	float present_value; // NPV
-
-	@Column(nullable = false)
-	int periods;
-
 	private int error;
-	private float[] cash_flow;
 
 	public Bond(BondDto bondDto, Long issuer_id) {
 		// Daily: 1
@@ -136,93 +130,44 @@ public class Bond {
 		this.available = 1;
 
 		this.public_value = Math.round(this.nominal_value * 1.01);
-		this.income_tax = 0.25f / 100.0f;
-		this.prime_vcto = 1.0f / 100.0f;
-		this.struct = 0.450f / 100.0f;
-		this.colocacion = 0.250f / 100.0f;
-		this.floating = 0.150f / 100.0f;
-		this.cavali = 0.500f / 100.0f;
-		this.tea_coupon = 7.5f / 100.0f;
-		this.yield_to_mat = 6.0f / 100.0f;
+		this.income_tax = 0.25f;
+		this.prime_vcto = 1.0f;
+		this.struct = 0.450f;
+		this.colocacion = 0.250f;
+		this.floating = 0.150f;
+		this.cavali = 0.500f;
+		this.tea_coupon = 7.5f;
+		this.yield_to_mat = 6.0f;
 
 		this.coupon_val = this.nominal_value * this.tea_coupon;
 		int periods = 0;
+		float cash_flow[];
 		if (this.capitalization_rate == 3) {
 			periods = this.due_date.getYear() - this.emission_date.getYear();
-		} else if (this.capitalization_rate == 2) {
-			periods = (1 + (int) ChronoUnit.DAYS.between(
-					this.emission_date.toInstant(),
-					this.due_date.toInstant()) / 30);
-		} else if (this.capitalization_rate == 1) {
-			periods = 1 + (int) ChronoUnit.DAYS.between(
+			if (periods == 0) {
+				error = 1;
+				return;
+			}
+			cash_flow = new float[periods];
+
+			cash_flow[0] = -(this.public_value * (1 - (this.floating + this.cavali)));
+			for (int i = 1; i < periods - 1; i++) {
+				cash_flow[i] = this.coupon_val;
+			}
+			cash_flow[periods - 1] = this.coupon_val + this.nominal_value;
+		}
+		if (this.capitalization_rate == 1) {
+			periods = (int) ChronoUnit.DAYS.between(
 					this.emission_date.toInstant(),
 					this.due_date.toInstant());
-		}
 
-		if (periods < 2) {
-			error = 1;
-			return;
-		}
-
-		this.periods = periods;
-		update_important_values();
-		System.out.println(String.format("%d periods initialized", periods));
-	}
-
-	public void update_important_values() {
-		gen_cash_flow();
-		update_irr();
-		update_npv();
-	}
-
-	void gen_cash_flow() {
-		// SHOULD BE STORED ON DATABASE AND NOT PERFORMED EVERY TIME
-		this.cash_flow = new float[this.periods];
-		// eq: 0 = sum( c / (1 + IRR)^i )
-		this.cash_flow[0] = -(this.public_value - (this.public_value * (this.floating + this.cavali)));
-		for (int i = 1; i < this.periods - 1; i++) {
-			this.cash_flow[i] = this.coupon_val;
-		}
-		this.cash_flow[this.periods - 1] = this.coupon_val + this.nominal_value
-				+ (this.nominal_value * this.prime_vcto);
-	}
-
-	public void update_irr() {
-		// 1 - ( 1 + i)^n / i = fc[0]/cupon
-		float obj = -1 * this.cash_flow[0] / this.coupon_val / 100;
-
-		float best_guess = 0.0f;
-		float best_result = 0.0f;
-		float best_difference = Integer.MAX_VALUE;
-
-		for (float i = 0.00f; i < 15.0f; i += 0.005f) {
-			float current = (float) (1 - Math.pow(1 + i / 100.0f, -(this.periods - 1))) / i;
-			float diff = Math.abs(obj - current);
-			if (diff < best_difference) {
-				best_difference = diff;
-				best_result = current;
-				best_guess = i;
+			if (periods == 0) {
+				error = 1;
+				return;
 			}
+
 		}
-		this.return_rate = best_guess;
-		System.out.println(String.format("IRR: %f I/C: %f Res: %f",
-				this.return_rate, obj, best_result));
-	}
+		System.out.println(String.format("%d periods initialized", periods));
 
-	public void update_npv() {
-		// update on jpa missing
-		// fix in service TODO
-
-		float TIR = this.return_rate / 100;
-		float NPV = 0.0f;
-
-		System.out.println("NPV over time:");
-
-		for (int i = 0; i < this.periods; i++) {
-			NPV += (float) this.cash_flow[i] / (float) Math.pow(1 + TIR, i);
-		}
-
-		this.present_value = NPV;
-		System.out.println("NPV: " + this.present_value);
 	}
 }

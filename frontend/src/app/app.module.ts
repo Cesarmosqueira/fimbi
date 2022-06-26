@@ -26,6 +26,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { IssuerRegisterComponent } from './issuer-register/issuer-register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { IssuerProfileComponent } from './issuer-profile/issuer-profile.component';
+import { LiborChartComponent } from './libor-chart/libor-chart.component';
+import {NgApexchartsModule} from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { IssuerProfileComponent } from './issuer-profile/issuer-profile.componen
     IssuerRegisterComponent,
     UserProfileComponent,
     IssuerProfileComponent,
+    LiborChartComponent,
   ],
   imports: [
     HttpClientModule,
@@ -59,7 +62,8 @@ import { IssuerProfileComponent } from './issuer-profile/issuer-profile.componen
     MatDatepickerModule,
     MatRadioModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    NgApexchartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

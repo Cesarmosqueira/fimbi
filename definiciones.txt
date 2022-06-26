@@ -1,0 +1,13 @@
+Valor Nominal -> Es el valor que el emisor/dueño del bono le da a este
+Valor Comercial -> Es el valor comercial que el bono tiene en el mercado
+Nº de Años -> Numero de años de pago
+Dias x Periodo -> Numero de dias en un periodo regular de pago
+Dias x Año -> Numero de dias por año
+Imp. a la Renta -> Tributo que se determina anualmente 
+% Prima al vcto -> Cuota o porcentaje del valor nominal remitido en el momento del pago
+% Estructuración -> Porcentaje por la estructuracion del bono
+% Colocación -> Porcentaje de la colocacion del bono
+% Flotación -> Porcentaje por gastos de Flotación del Bono
+% CAVALI -> Porcentaje por CAVALI del Bono
+TEA del cupón -> Tasa efectiva anual que se aplica al cupon
+Tasa de Descuento YTM -> Tasa efectiva anual de mercado al momento de la valoración.

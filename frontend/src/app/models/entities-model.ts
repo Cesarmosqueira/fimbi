@@ -28,7 +28,31 @@ export class Bond {
   external_interest_rate: string;
   interest_rate: number;
   issuer_identifier: string;
+  total_value: number;
   nominal_value: number;
+  splits: number;
+
+  prime_vcto : number;
+  struct : number;
+  colocacion : number;
+  floating : number;
+  cavali : number; 
+  tea_coupon : number;
+  yield_to_mat : number;
+  coupon_val : number;
+  return_rate : number;
+  present_value : number;
+  periods : number;
+}
+
+export class BondReq {
+  id: number;
+  capitalization_rate: string;
+  due_date: Date;
+  external_interest_rate: string;
+  interest_rate: number;
+  issuer_identifier: string;
+  total_value: number;
   splits: number;
 }
 

@@ -27,6 +27,10 @@ export class BondDetailComponent implements OnInit {
     return "US$ " + (Math.round(n * 100) / 100).toLocaleString();
   }
 
+  formatPercentage(n : number) {
+    return parseFloat(n.toString()).toFixed(2)+"%"
+  }
+
   goToPage(pageName:string){
     this.navigator.navigate([`${pageName}`]);
   }
@@ -45,6 +49,7 @@ export class BondDetailComponent implements OnInit {
   load_bond() : void {
     this.bondService.getById(this.bond_id).subscribe({
       next: (data) => {
+        console.log(data);
         this.bond = data;
         this.load_issuer(this.bond.issuer_identifier)
         this.unit_value = this.bond.nominal_value / this.bond.splits

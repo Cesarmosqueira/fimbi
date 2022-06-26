@@ -38,7 +38,7 @@ export class BondIndexComponent implements OnInit {
   }
 
   retrieveBonds() : void {
-    this.bondService.getLast(5).subscribe({
+    this.bondService.getAll().subscribe({
       next: (data) => {
         this.bonds = data;
       },

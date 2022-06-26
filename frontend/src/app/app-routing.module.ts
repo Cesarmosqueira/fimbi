@@ -6,6 +6,7 @@ import {BondPublishComponent} from './bond-publish/bond-publish.component';
 import {HomeComponent} from './home/home.component';
 import {IssuerProfileComponent} from './issuer-profile/issuer-profile.component';
 import {IssuerRegisterComponent} from './issuer-register/issuer-register.component';
+import {LiborChartComponent} from './libor-chart/libor-chart.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'registerissuer', component: IssuerRegisterComponent },
   { path: 'u/:username', component: UserProfileComponent },
   { path: 'i/:identifier', component: IssuerProfileComponent },
+  { path: 'chart', component: LiborChartComponent },
   {
     path: '',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)

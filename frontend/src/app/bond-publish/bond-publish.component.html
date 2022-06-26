@@ -25,7 +25,8 @@
 
     <mat-form-field appearance="legacy" class="text_box">
       <mat-label>Due date</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="bond.due_date" name="DueDate">
+      <input matInput [matDatepicker]="picker"
+      [(ngModel)]="bond.due_date" name="DueDate" required>
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -69,7 +70,7 @@
       <mat-label>Total Value</mat-label>
       <input matInput
         name="TotalValue"
-        [(ngModel)]="bond.nominal_value"
+        [(ngModel)]="bond.total_value"
         #capitalization="ngModel"
         class="text_box"
         required>

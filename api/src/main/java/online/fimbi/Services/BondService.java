@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import online.fimbi.Common.EntityDtoConverter;
 import online.fimbi.Dto.BondDto;
+import online.fimbi.Dto.BondDtoRes;
 import online.fimbi.Dto.PurchaseDto;
 import online.fimbi.Entities.Bond;
 import online.fimbi.Entities.Issuer;
@@ -47,6 +48,9 @@ public class BondService {
 			throw new FimbiException(String.format("Unknown identifier: '%s'", issuer_identifier));
 		}
 		Bond bond = new Bond(bondDto, ids_for_identifier.get(0));
+		if (bond.getError() == 1) {
+			throw new FimbiException("That date won't work");
+		}
 
 		if (ids_for_identifier.size() > 1) {
 			System.out.println(String.format("[WARNING] There are more than one issuers by the name of %s",
@@ -61,14 +65,14 @@ public class BondService {
 	}
 
 	public List<BondDto> getBonds() {
-		List<Bond> bonds = bondRepository.findAll();
+		List<Bond> bonds = bondRepository.get_all_by_date();
 		return entityDtoConverter.convertBondsToDto(bonds);
 	}
 
-	public BondDto getById(Long bond_id) throws FimbiException {
+	public BondDtoRes getById(Long bond_id) throws FimbiException {
 		Bond bond = bondRepository.findById(bond_id)
 				.orElseThrow(() -> new FimbiException("bond #" + bond_id + " not found"));
-		return entityDtoConverter.convertBondToDto(bond);
+		return entityDtoConverter.convertBondToDtoBig(bond);
 	}
 
 	public List<PurchaseDto> get_lastest_purchases(int size) {

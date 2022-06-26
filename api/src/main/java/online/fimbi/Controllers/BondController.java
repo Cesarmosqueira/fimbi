@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import online.fimbi.Dto.BondDto;
+import online.fimbi.Dto.BondDtoRes;
 import online.fimbi.Dto.PurchaseDto;
 import online.fimbi.Services.BondService;
 
@@ -37,9 +38,9 @@ public class BondController {
 	}
 
 	@GetMapping("{bond_id}")
-	public ResponseEntity<BondDto> getById(@PathVariable Long bond_id) {
-		BondDto bondDto = bondService.getById(bond_id);
-		return new ResponseEntity<>(bondDto, HttpStatus.OK);
+	public ResponseEntity<BondDtoRes> getById(@PathVariable Long bond_id) {
+		BondDtoRes bondDtoRes = bondService.getById(bond_id);
+		return new ResponseEntity<>(bondDtoRes, HttpStatus.OK);
 	}
 
 	@GetMapping("user/{username}")

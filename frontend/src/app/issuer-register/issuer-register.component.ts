@@ -24,6 +24,8 @@ export class IssuerRegisterComponent implements OnInit {
 
   onRegister() {
     console.log(this.issuer);
+    this.issuer.market_identifier = 
+      this.issuer.market_identifier.toUpperCase();
     this.issuerService.register(this.issuer).subscribe({
       next: (data) => {
         console.log(data);

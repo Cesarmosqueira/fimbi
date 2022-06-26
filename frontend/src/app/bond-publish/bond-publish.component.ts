@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatRadioChange} from '@angular/material/radio';
-import {Bond} from '../models/entities-model';
+import {Bond, BondReq} from '../models/entities-model';
 import {BondsService} from '../services/bonds.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class BondPublishComponent implements OnInit {
   selectedValue: number;
   selectedCapitalization : string;
   interest: number;
-  bond = new Bond;
+  bond = new BondReq;
   first: boolean;
   error: boolean;
   error_msg :  string;
