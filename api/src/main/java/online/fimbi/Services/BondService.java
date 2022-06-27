@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import online.fimbi.Common.EntityDtoConverter;
 import online.fimbi.Dto.BondDto;
 import online.fimbi.Dto.BondDtoRes;
+import online.fimbi.Dto.DotDto;
+import online.fimbi.Dto.GraphDto;
 import online.fimbi.Dto.PurchaseDto;
 import online.fimbi.Entities.Bond;
 import online.fimbi.Entities.Issuer;
@@ -73,6 +75,12 @@ public class BondService {
 		Bond bond = bondRepository.findById(bond_id)
 				.orElseThrow(() -> new FimbiException("bond #" + bond_id + " not found"));
 		return entityDtoConverter.convertBondToDtoBig(bond);
+	}
+
+	public GraphDto getByCashId(Long bond_id) throws FimbiException {
+		Bond bond = bondRepository.findById(bond_id)
+				.orElseThrow(() -> new FimbiException("bond #" + bond_id + " not found"));
+		return bond.getCashFlow();
 	}
 
 	public List<PurchaseDto> get_lastest_purchases(int size) {

@@ -1,5 +1,5 @@
 import {HttpClient} from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 import {
   ApexAxisChartSeries,
@@ -29,34 +29,23 @@ export class LiborChartComponent implements OnInit {
   public yaxis: ApexYAxis;
   public xaxis: ApexXAxis;
   public tooltip: ApexTooltip;
-  public values : any[][];
 
-  constructor(private http : HttpClient) {
-    this.initChartData();
+  @Input('app-libor-chart') values : any[][];
+  constructor() {
   }
   ngOnInit(): void {
-    this.http.get<any>('https://raw.githubusercontent.com/Cesarmosqueira/fimbi/master/ORB.json')
-      .subscribe({
-      next: (data) => {
-        this.values = data.dataset.data;
-        this.initChartData();
-      },
-      error: (e) => {
-        console.error(e);
-      }
-    });
-
+    this.initChartData();
   }
 
   initChartData(): void {
-
-    console.log(this.values);
     let dates : any[] = [];
 
-    for(let d in this.values) {
-      let time = new Date(d[0]).getTime();
-      dates.push([time, d[1]])
+    for(let i=0; i< this.values.length; i++) {
+      let x = new Date(this.values[i][0]).getTime()
+      let y = this.values[i][1]
+      dates.push([x, y])
     }
+    console.log(dates);
 
     this.series = [
       {

@@ -52,18 +52,31 @@
                 <b>Due Date</b>: {{bond.due_date}}
               </mat-list-item>
               <mat-list-item>
+                <b>Periods</b>: {{bond.periods}}
+              </mat-list-item>
+              <mat-list-item>
+                <b>Capitalization</b>: {{capitalization()}}
+              </mat-list-item>
+              <mat-list-item>
                 <b>NPV</b>: {{bond.present_value.toFixed(2)}}
               </mat-list-item>
               <mat-list-item>
                 <b>IRR</b>: {{bond.return_rate.toFixed(2)}}%
               </mat-list-item>
-              <mat-list-item>
-                <b>Periods</b>: {{bond.periods}}
-              </mat-list-item>
             </mat-list>
           </mat-tab>
-          <mat-tab label="Otro grafico o no se">
-            Otro grafico o no se
+          <mat-tab label="Cash Flow">
+            <div *ngIf="loaded == 1">
+              <div [app-libor-chart]="cash_flow"></div>
+            </div>
+            <div *ngIf="loaded == 0">
+              Trying to retrieve Cash flow
+            </div>
+            <div *ngIf="loaded == 2">
+              <mat-error>
+                Couldn't retrieve cash flow
+              </mat-error>
+            </div>
           </mat-tab>
 
           <mat-tab label="Transaction Details">

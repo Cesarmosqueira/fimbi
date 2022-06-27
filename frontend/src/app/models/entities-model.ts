@@ -9,6 +9,15 @@ export class LoginOptional {
   password : string | null;
 }
 
+export class ChartDot {
+  date : Date;
+  value : number;
+}
+export class ChartData {
+  data : ChartDot[];
+}
+
+
 export class User {
   username : string;
   password : string;

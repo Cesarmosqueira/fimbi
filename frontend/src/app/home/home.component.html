@@ -65,9 +65,18 @@
   <div class="right_column">
     <mat-card class="big-card">
       <mat-card class="card">
-        <div class="button">
-          <div app-libor-chart></div>
+        <div *ngIf="loaded == 1">
+          <div [app-libor-chart]="libor_data"></div>
         </div>
+        <div *ngIf="loaded == 0">
+          Trying to load LIBOR data
+        </div>
+        <div *ngIf="loaded == 2">
+          <mat-error>
+            Couldn't load LIBOR data
+          </mat-error>
+        </div>
+
       </mat-card>
     </mat-card>
 

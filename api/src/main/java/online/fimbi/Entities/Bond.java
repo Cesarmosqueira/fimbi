@@ -1,7 +1,9 @@
 package online.fimbi.Entities;
 
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -21,6 +23,8 @@ import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import online.fimbi.Dto.BondDto;
+import online.fimbi.Dto.DotDto;
+import online.fimbi.Dto.GraphDto;
 
 @Entity
 @Table(name = "bond")
@@ -224,5 +228,27 @@ public class Bond {
 
 		this.present_value = NPV;
 		System.out.println("NPV: " + this.present_value);
+	}
+
+	public GraphDto getCashFlow() {
+		// Daily: 1
+		// Monthly: 2
+		// Anually: 3
+		this.gen_cash_flow();
+		GraphDto graph = new GraphDto();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(this.emission_date);
+		for (int i = 0; i < this.periods; i++) {
+			if (this.capitalization_rate == 1) {
+				cal.add(Calendar.DATE, 1);
+			} else if (this.capitalization_rate == 2) {
+				cal.add(Calendar.MONTH, 1);
+			} else if (this.capitalization_rate == 3) {
+				cal.add(Calendar.YEAR, 1);
+			}
+			graph.data.add(new DotDto(cal.getTime(), cash_flow[i]));
+
+		}
+		return graph;
 	}
 }

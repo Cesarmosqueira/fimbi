@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
-import {Bond, BondReq, FimbiResponse, LoginOptional, Purchase} from '../models/entities-model';
+import {Bond, BondReq, ChartData, FimbiResponse, LoginOptional, Purchase} from '../models/entities-model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,10 @@ export class BondsService {
   }
   getById(id : number): Observable<Bond> {
     return this.http.get<Bond>(`${this.apiBase}/bonds/${id}`);
+  }
+
+  getCashFlowById(id : number): Observable<ChartData> {
+    return this.http.get<ChartData>(`${this.apiBase}/bonds/cash_flow/${id}`);
   }
 
   getLast(n : number): Observable<Bond[]> {

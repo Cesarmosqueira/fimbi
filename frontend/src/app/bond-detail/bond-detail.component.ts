@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Bond, Issuer, LoginOptional } from '../models/entities-model';
+import { Bond, ChartData, Issuer, LoginOptional } from '../models/entities-model';
 import { BondsService } from '../services/bonds.service';
 import { IssuerService } from '../services/issuer.service';
 
@@ -16,6 +16,9 @@ export class BondDetailComponent implements OnInit {
   submitted: boolean;
   unit_value : number;
   bond_id : number;
+  loaded : number;
+  cash_flow : any[][]; 
+  cash_data : ChartData;
   bond : Bond = new Bond;
   issuer : Issuer = new Issuer;
   constructor(private router : ActivatedRoute, 
@@ -39,11 +42,50 @@ export class BondDetailComponent implements OnInit {
     if(optional) {
       this.bond_id = Number(optional);
       this.load_bond();
+      this.retrieveCashFlow();
     }
 
+    this.loaded = 0;
     this.error = false;
     this.submitted = false;
     this.response = "";
+  }
+
+  capitalization() : string{
+    let cap = this.bond.capitalization_rate;
+    if (cap == '1') {
+      return "Daily";
+    }
+    else if (cap == '2') {
+      return "Monthly";
+    }
+    else if (cap == '3') {
+      return "Yearly";
+    } else {
+      return cap;
+    }
+  }
+
+  retrieveCashFlow() {
+    this.bondService.getCashFlowById(this.bond_id).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.cash_data = data;
+        let values = [];
+        for(let i = 0; i < data.data.length; i++) {
+          values.push([data.data[i].date.toLocaleString()
+          , data.data[i].value])
+        }
+        this.cash_flow = values;
+        console.log(this.cash_flow);
+        this.loaded = 1;
+      },
+      error: (e) => {
+        console.error(e);
+        this.loaded = -1;
+      }
+    });
+
   }
 
   load_bond() : void {

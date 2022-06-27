@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import online.fimbi.Dto.BondDto;
 import online.fimbi.Dto.BondDtoRes;
+import online.fimbi.Dto.GraphDto;
 import online.fimbi.Dto.PurchaseDto;
 import online.fimbi.Services.BondService;
 
@@ -40,6 +41,12 @@ public class BondController {
 	@GetMapping("{bond_id}")
 	public ResponseEntity<BondDtoRes> getById(@PathVariable Long bond_id) {
 		BondDtoRes bondDtoRes = bondService.getById(bond_id);
+		return new ResponseEntity<>(bondDtoRes, HttpStatus.OK);
+	}
+
+	@GetMapping("cash_flow/{bond_id}")
+	public ResponseEntity<GraphDto> getCashById(@PathVariable Long bond_id) {
+		GraphDto bondDtoRes = bondService.getByCashId(bond_id);
 		return new ResponseEntity<>(bondDtoRes, HttpStatus.OK);
 	}
 
